@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        #iframe_container {
+            width: 100%;
+        }
+        #iframe {
+            width: 100%;
+            height: 500px;
+        }
+        #nav2 {
+            float: right;
+        }
+        #nav1 {
+            float: left;
+        }
+        #nav1, #nav2 {
+            width: 49%;
+        }
+    </style>
+</head>
+<body>
+<h1>{{filename}}</h1>
+    <div id='iframe_container'>
+        <iframe id='iframe' name='iframe' src='spawns_{{filename}}_all.html'>
+
+        </iframe>
+    </div>
+
+    <div id='nav'>
+   
+    <hr>
+    <div id='nav1'>
+        <table>
+            {% for poke_id in range(0,152) %}
+            {% if poke_id in pokemon %}
+                <tr>
+                    <td>
+                        <img src="static/icons/{{poke_id}}.png">
+                    </td>
+                    <td colspan=2>
+                        <a href='spawns_{{filename}}_{{poke_id}}.html' target='iframe'><b>#{{poke_id}} {{pokemon[poke_id].pokemon.Name}}</b></a>
+                    </td>
+                    <td>
+                        locations: {{ (pokemon[poke_id]|length) - 1 }}<br>
+                        sightings: {{ poke_spawns[poke_id]|length }}
+                    </td>
+
+                </tr>
+                <tr>
+                <td>day</td>
+                <td>time</td>
+                <td>gps</td>
+                </tr>
+                
+                {% for spawn in poke_spawns[poke_id] %}
+                <tr>
+                    <td>{{ spawn[2] }}.</td><td><b>{{ spawn[3] }}</b></td><td>{{ spawn[4] }},{{ spawn[5] }}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    <div id='nav2'>
+     <table>
+        <tr>
+        <td>
+        <img src="static/forts/Gym.png">
+        </td>
+        <td>
+            <a href='spawns_{{filename}}_all.html' target='iframe'><b>All spawn locations</b></a>
+        </td>
+        </tr>
+        </table>
+        <table>
+        {% for loc in loc_spawns %}
+            <tr>
+                <th colspan=4>
+                {{ loc }} 
+                </th>
+            </tr>
+            <tr>
+            <td>day</td>
+            <td>time/delta</td>
+            <td>#</td>
+            <td> </td>
+            <td>name</td>
+            </tr>
+            <!--
+            <tr>
+                <td colspan=5>
+                {% for spawn in loc_spawns[loc]['occurence'] %}
+                    {{spawn[0]}} ({{spawn[1]}}),
+                {% endfor %}
+                </td>
+            </tr>
+            -->
+            </tr>
+            {% for spawn in loc_spawns[loc]['spawns'] %}
+                <tr>
+                <td>
+                    {{ spawn.day }}.
+                </td>
+                <td>
+                    {{ spawn.time }} 
+                        {% if spawn.delta %}<i>+{{ spawn.delta }}min</i>
+                    {% endif %}
+                </td>
+                <td>
+                    #{{ spawn.id }}
+                </td>
+                <td>
+                    <img src="static/icons/{{spawn.id}}.png">
+                </td>
+                <td>
+                    {{ spawn.pokemon.Name }}
+                </td>
+                <td>
+                </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </table>
+    </div>
+    </div>
+</body>
+</html>

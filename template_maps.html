@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+    <!DOCTYPE html>
+    <html>
+    <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>45 Pokemon GO</title>
+            <link rel="shortcut icon" href="/static/favicon.ico">
+            <link rel="stylesheet" href="">
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="static/jquery.js">\x3C/script>')</script>
+                    
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=ENTER_HERE_GOOGLE_MAPS_KEY" type="text/javascript"></script>
+
+
+        <style type="text/css">
+              #fullmap { height:100%;width:100%;top:0;left:0;position:absolute;z-index:200;margin-bottom: 20px; }
+        </style>
+        <script type="text/javascript">
+            function initialize_map() {
+                var map = new google.maps.Map(document.getElementById('fullmap'), {
+                    center: new google.maps.LatLng({{center}}),
+                    zoom: 14,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    zoomControl: true,
+                    mapTypeControl: true,
+                    scaleControl: true,
+                    streetViewControl: false,
+                    rotateControl: true,
+                    fullscreenControl: true
+                });
+
+                
+
+                {% for loc in spawns %}
+                {% if loc not in ['pokemon', 'spawn_at'] %}
+                    
+                    var marker_{{loc.replace('.','_')}} = new google.maps.Marker({
+                        position: new google.maps.LatLng({{ loc.split('_')[1] }},{{ loc.split('_')[2] }}),
+                        map: map,
+                        icon: "static/icons/{{poke_id}}.png"
+                    });
+
+                    marker_{{loc.replace('.','_')}}
+
+                    google.maps.event.addListener(
+                        marker_{{loc.replace('.','_')}},
+                        'click',
+                        getInfoCallback(map, "count: {% for spawn in spawns[loc] %}<br>{{spawn.time[0]}}:{{spawn.time[1]}}{% endfor %}")
+                    );
+                {% endif %}
+                {% endfor %}
+            }
+
+            function getInfoCallback(map, content) {
+                var infowindow = new google.maps.InfoWindow({content: content});
+                return function() {
+                        infowindow.setContent(content);
+                        infowindow.open(map, this);
+                    };
+            }
+            google.maps.event.addDomListener(window, 'load', initialize_map);
+        </script>
+        <div id="fullmap" class="map"></div>
+</html>
+
