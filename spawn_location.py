@@ -30,9 +30,11 @@ def render(tpl_path, context):
 
 # 10,52.4108212665,13.3102412315,1468989590
 # 10,52.4108343008,13.3101272484,1468975290
+#id	pokemon_id	spawn_id	expire_timestamp	normalized_timestamp	lat	lon
 for line in lines:
-    poke_id, coord_lat, coord_long, despawn = line.split(',')
+    id, poke_id, spawn_id, expire_timestamp, coord_lat, coord_long, despawn = line.split(',')
     poke_id = int(poke_id)
+    id = int(id)
     map_id = "{}_{}_{}".format(poke_id, coord_lat, coord_long)
     loc_id = "{},{}".format(coord_lat, coord_long)
     if loc_id not in spawns:
