@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<script src="sorttable.js"></script>
+    <style>
+    
+        #iframe_container {
+            width: 70%;
+            float: right;
+        }
+        #iframe {
+            width: 100%;
+            height: 800px;
+        }
+        #nav1 {
+            float: left;
+            overflow:auto;
+            width: 30%;
+            height: 800px;
+        }
+      
+  table {  
+  			table-layout: fixed;
+         	font-family: Roboto, sans-serif;
+    		border-collapse: collapse;
+    		width: 100%;
+    		height: 800px;
+		}
+		th, td, tr{
+    		padding: 8px;
+		}
+		th {
+    		background-color: #F36E21;
+    		color: white;
+    		}
+		tr:hover {background-color: #f5f5f5}
+    thead tr { display: block; }
+    tbody {  
+      overflow: auto; 
+      display: block; 
+      height: 800px; 
+      overflow: auto; 
+      width: 100%;  
+      }	  
+    	  
+    	  
+    thead th { width: 250px; } 
+    tbody td { width: 242px; }
+ 	a:link, a:visited {color: #F36E21;text-decoration: none;}
+	a:hover, a:active {background-color: #f2f2f2;}
+}
+    </style>
+</head>
+<body>
+    <div id='iframe_container'>
+        <iframe id='iframe' name='iframe' src='spawns_{{filename}}_all.html'>
+
+        </iframe>
+    </div>
+    <div id='nav1'>
+        <table class="sortable">
+        <tbody>
+            <tr>
+                <th align="left"> </th>
+                <th align="left">ID</th>
+                <th align="left">Name</th>
+    			<th align="left">Loc</th> 
+    			<th align="left">#</th>
+    		</tr>
+    		<tr>
+            {% for poke_id in range(0,152) %}
+            {% if poke_id in pokemon %}
+                    <td>
+                        <img src="static/icons/{{poke_id}}.png">
+                    </td>
+                    <td>
+                        <a href='spawns_{{filename}}_{{poke_id}}.html' target='iframe'><b>{{poke_id}}</b></a>
+                    </td>
+                    <td>
+                        <a href='spawns_{{filename}}_{{poke_id}}.html' target='iframe'><b>{{pokemon[poke_id].pokemon.Name}}</b></a>
+                    </td>
+                    <td>
+                        {{(pokemon[poke_id]|length) - 1}}<br>
+                    </td>
+                    <td> 
+                       {{poke_spawns[poke_id]|length}}
+                    </td>
+                    </td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>  
+        </table>
+    </div>
+</body>
+</html>
