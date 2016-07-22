@@ -32,7 +32,7 @@ def render(tpl_path, context):
 # 10,52.4108343008,13.3101272484,1468975290
 #id	pokemon_id	spawn_id	expire_timestamp	normalized_timestamp	lat	lon
 for line in lines:
-    id, poke_id, spawn_id, expire_timestamp, coord_lat, coord_long, despawn = line.split(',')
+    id, poke_id, spawn_id, expire_timestamp, despawn ,coord_lat, coord_long = line.split(',')
     poke_id = int(poke_id)
     id = int(id)
     map_id = "{}_{}_{}".format(poke_id, coord_lat, coord_long)
@@ -130,6 +130,10 @@ for loc_id in spawns:
 html = render('template_spawns.html', {'loc_spawns': loc_spawns, 'pokemon': pokemon, 'poke_spawns': poke_spawns, 'filename': sys.argv[1], 'center':center})
 with open('spawns_{}.html'.format(sys.argv[1]), 'w') as f:
     f.write(html)
+    
+html = render('template_spawns_simple.html', {'loc_spawns': loc_spawns, 'pokemon': pokemon, 'poke_spawns': poke_spawns, 'filename': sys.argv[1], 'center':center})
+with open('spawns_{}_simple.html'.format(sys.argv[1]), 'w') as f:
+    f.write(html) 
 
 html = render('template_maps2.html', {'loc_spawns': loc_spawns, 'pokemon': pokemon, 'filename': sys.argv[1], 'center':center})
 with open('spawns_{}_all.html'.format(sys.argv[1]), 'w') as f:
