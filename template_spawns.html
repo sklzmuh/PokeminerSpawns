@@ -37,7 +37,7 @@
             {% if poke_id in pokemon %}
                 <tr>
                     <td>
-                        <img src="static/icons/{{poke_id}}.png">
+                        <img src="../static/icons/{{poke_id}}.png">
                     </td>
                     <td colspan=2>
                         <a href='spawns_{{filename}}_{{poke_id}}.html' target='iframe'><b>#{{poke_id}} {{pokemon[poke_id].pokemon.Name}}</b></a>
@@ -68,7 +68,7 @@
      <table>
         <tr>
         <td>
-        <img src="static/forts/Gym.png">
+        <img src="../static/forts/Gym.png">
         </td>
         <td>
             <a href='spawns_{{filename}}_all.html' target='iframe'><b>All spawn locations</b></a>
@@ -113,7 +113,7 @@
                     #{{ spawn.id }}
                 </td>
                 <td>
-                    <img src="static/icons/{{spawn.id}}.png">
+                    <img src="../static/icons/{{spawn.id}}.png">
                 </td>
                 <td>
                     {{ spawn.pokemon.Name }}
