@@ -139,8 +139,6 @@ html = render('template_maps2.html', {'loc_spawns': loc_spawns, 'pokemon': pokem
 with open('spawns_{}_all.html'.format(sys.argv[1]), 'w') as f:
     f.write(html)
 
-#GoogleMaps(app, key=GOOGLEMAPS_KEY)
-
 for poke_id in range(0,152):
     if poke_id in pokemon:
 
