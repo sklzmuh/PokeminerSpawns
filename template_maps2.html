@@ -5,10 +5,10 @@
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <title>45 Pokemon GO</title>
-            <link rel="shortcut icon" href="/../static/favicon.ico">
+            <link rel="shortcut icon" href="/static/favicon.ico">
             <link rel="stylesheet" href="">
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-            <script>window.jQuery || document.write('<script src="../static/jquery.js">\x3C/script>')</script>
+            <script>window.jQuery || document.write('<script src="static/jquery.js">\x3C/script>')</script>
                     
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZzeHhs-8JZ7i18MjFuM35dJHq70n3Hx4" type="text/javascript"></script>
@@ -32,13 +32,13 @@
                 {% for loc in loc_spawns %}
      
                     {{ loc }} 
-                    var marker_{{loc.replace('.','_').replace(',','_').replace('-','_')}} = new google.maps.Marker({
+                    var marker_{{loc.replace('.','_').replace(',','_').replace('-','_').replace('"','_')}} = new google.maps.Marker({
                         position: new google.maps.LatLng({{ loc }}),
                         map: map,
                         icon: "../static/forts/Gym.png"
                     });
                     google.maps.event.addListener(
-                        marker_{{loc.replace('.','_').replace(',','_').replace('-','_')}},
+                        marker_{{loc.replace('.','_').replace(',','_').replace('-','_').replace('"','_')}},
                         'click',
                         getInfoCallback(map, "<table>{% for spawn in loc_spawns[loc]['spawns'] %}<td>{{ spawn.day }}. <b>{{ spawn.time }}</b>{% if spawn.delta %}<i>(+{{ spawn.delta }})</i>{% endif %}</td><td><a href='spawns_{{filename}}_{{spawn.id}}.html'>#{{ spawn.id }} <b>{{ spawn.pokemon.Name }}</b></a></td></tr>{% endfor %}</table>")
                     );
