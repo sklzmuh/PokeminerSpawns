@@ -15,7 +15,7 @@ center = sys.argv[2]
 
 pokemon = {}
 spawns = {}
-pokemonsJSON = json.load(open('pokemon.json'))
+pokemonsJSON = json.load(open('../locales/pokemon.en.json'))
 
 # 29 -> 30
 def fix_delta(delta):
