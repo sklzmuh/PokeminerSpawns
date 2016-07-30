@@ -6,9 +6,10 @@ Forked from gist https://gist.github.com/ferazambuja/bb7482ffaefe4c554f2b88165a0
 - [Download](https://github.com/Cy4n1d3/PokeminerSpawns/archive/master.zip) this Git
  - Extract all files into `/spawn` subdirectory
  - `spawn_location.py` should be located at `/Pokeminer/spawn/spawn_location.py`
-- Run with `spawn_location.py "LAT, LONG" OPTIONAL_SUFFIX`
+- Run with `spawn_location.py "LAT, LONG" [FILE_SUFFIX] [LOCALE]`
  - `"LAT, LONG"`: location where generated maps should be centered (e.g. `"12.34, 13.45"`)
  - `OPTIONAL_SUFFIX`: suffix which will be appended to generated html files
+ - `LOCALE`: which Pokemon JSON locale to use (available right now: `de`, `en`, `fr`, `zh_cn`)
  
 Note: Pokemon spawn information is extracted from the Pokeminer database.
 Currently this script only works with SQLite databases and it's assumed that your Pokeminer database is named `db.sqlite`.
