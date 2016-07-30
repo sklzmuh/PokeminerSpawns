@@ -5,10 +5,6 @@ import jinja2
 import os
 import operator
 import sqlite3
-import codecs
-
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
 locales = ['de', 'en', 'fr', 'zh_cn']
 locale = 'en'
@@ -78,7 +74,7 @@ for poke_id in xrange(0, 152):
         continue
     print '\n'
     print "#########################################################"
-    print "#{:03} {}".format(poke_id, pokemonsJSON[str(poke_id)])
+    print "#{:03} {}".format(poke_id, pokemonsJSON[str(poke_id)].decode('utf-8'))
     print "#########################################################"
     poke_spawns[poke_id] = []
     for map_id in (i for i in pokemon[poke_id] if i not in ['pokemon', 'spawn_at']):
@@ -145,13 +141,15 @@ for loc_id in spawns:
                 loc_spawns[loc_id]['spawns'].append(
                     {'id': t[2]['id'], 'pokemon': pokemonsJSON[str(t[2]['id'])], 'delta': delta, 'hours': t[0],
                      'minutes': t[1], 'day': t[3], 'time': "{:02}:{:02}".format(t[0], t[1])})
-                print "> {:02}:{:02} - #{:03} {:10} | +{}".format(t[0], t[1], t[2]['id'], pokemonsJSON[str(t[2]['id'])],
+                print "> {:02}:{:02} - #{:03} {:10} | +{}".format(t[0], t[1], t[2]['id'],
+                                                                  pokemonsJSON[str(t[2]['id'])].decode('utf-8'),
                                                                   delta)
         else:
             loc_spawns[loc_id]['spawns'].append(
                 {'id': t[2]['id'], 'pokemon': pokemonsJSON[str(t[2]['id'])], 'delta': None, 'hours': t[0],
                  'minutes': t[1], 'day': t[3], 'time': "{:02}:{:02}".format(t[0], t[1])})
-            print "> {:02}:{:02} - #{:03} {:10}".format(t[0], t[1], t[2]['id'], pokemonsJSON[str(t[2]['id'])])
+            print "> {:02}:{:02} - #{:03} {:10}".format(t[0], t[1], t[2]['id'],
+                                                        pokemonsJSON[str(t[2]['id'])].decode('utf-8'))
         last_time = _t
         last_day = t[2]
     loc_spawns[loc_id]['occurence'] = sorted(loc_spawns[loc_id]['occurence'].items(), key=operator.itemgetter(1))[::-1]
