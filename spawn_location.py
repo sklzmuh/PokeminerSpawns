@@ -13,10 +13,10 @@ suffix = ''
 if len(sys.argv) < 2:
     raise ValueError(
         'Missing arguments. Please supply lat/long like "12.34, 14.56"')
-elif len(sys.argv) == 3:
+elif len(sys.argv) == 3 and len(sys.argv[2]) > 0:
     suffix = "_{}".format(str(sys.argv[2]))
-elif len(sys.argv) == 4:
-    suffix = "_{}".format(str(sys.argv[2]))
+
+if len(sys.argv) == 4:
     if str(sys.argv[3]) in locales:
         locale = str(sys.argv[3])
 
