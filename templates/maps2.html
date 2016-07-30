@@ -38,7 +38,7 @@
                     google.maps.event.addListener(
                         marker_{{loc.replace('.','_').replace(',','_').replace('-','_').replace('"','_')}},
                         'click',
-                        getInfoCallback(map, "<table>{% for spawn in loc_spawns[loc]['spawns'] %}<td>{{ spawn.day }}. <b>{{ spawn.time }}</b>{% if spawn.delta %}<i>(+{{ spawn.delta }})</i>{% endif %}</td><td><a href='spawns_{{filename}}_{{spawn.id}}.html'>#{{ spawn.id }} <b>{{ spawn.pokemon.Name }}</b></a></td></tr>{% endfor %}</table>")
+                        getInfoCallback(map, "<table>{% for spawn in loc_spawns[loc]['spawns'] %}<td>{{ spawn.day }}. <b>{{ spawn.time }}</b>{% if spawn.delta %}<i>(+{{ spawn.delta }})</i>{% endif %}</td><td><a href='spawns_{{filename}}_{{spawn.id}}.html'>#{{ spawn.id }} <b>{{ spawn.pokemon }}</b></a></td></tr>{% endfor %}</table>")
                     );
                         
                     

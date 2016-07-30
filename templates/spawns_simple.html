@@ -65,7 +65,7 @@
                 <th align="left">ID</th>
                 <th align="left">Name</th>
     			<th align="left">Places</th> 
-    			<th align="left"> # </th>
+    			<th align="left">Count</th>
     		</tr>
     		<tr>
             {% for poke_id in range(0,152) %}
@@ -77,7 +77,7 @@
                         <a href='spawns{{filename}}_{{poke_id}}.html' target='iframe'><b>{{poke_id}}</b></a>
                     </td>
                     <td>
-                        <a href='spawns{{filename}}_{{poke_id}}.html' target='iframe'><b>{{pokemon[poke_id].pokemon.Name}}</b></a>
+                        <a href='spawns{{filename}}_{{poke_id}}.html' target='iframe'><b>{{pokemon[poke_id].pokemon}}</b></a>
                     </td>
                     <td>
                         {{(pokemon[poke_id]|length) - 1}}<br>
