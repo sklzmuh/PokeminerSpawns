@@ -44,7 +44,7 @@
                     google.maps.event.addListener(
                         marker_{{id}},
                         'click',
-                        getInfoCallback(map, "count: {% for spawn in spawns[loc] %}<br>{{spawn.time[0]}}:{{spawn.time[1]}}{% endfor %}")
+                        getInfoCallback(map, "times: {% for spawn in spawns[loc] %}<br>{{spawn.time[0]}}:{{spawn.time[1]}}{% endfor %}")
                     );
                 {% endif %}
                 {% endfor %}

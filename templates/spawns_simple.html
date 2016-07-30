@@ -53,7 +53,7 @@
 </head>
 <body>
     <div id='iframe_container'>
-        <iframe id='iframe' name='iframe' src='spawns_{{filename}}_all.html'>
+        <iframe id='iframe' name='iframe' src='spawns{{filename}}_all.html'>
 
         </iframe>
     </div>
@@ -74,10 +74,10 @@
                         <img src="../static/icons/{{poke_id}}.png">
                     </td>
                     <td>
-                        <a href='spawns_{{filename}}_{{poke_id}}.html' target='iframe'><b>{{poke_id}}</b></a>
+                        <a href='spawns{{filename}}_{{poke_id}}.html' target='iframe'><b>{{poke_id}}</b></a>
                     </td>
                     <td>
-                        <a href='spawns_{{filename}}_{{poke_id}}.html' target='iframe'><b>{{pokemon[poke_id].pokemon.Name}}</b></a>
+                        <a href='spawns{{filename}}_{{poke_id}}.html' target='iframe'><b>{{pokemon[poke_id].pokemon.Name}}</b></a>
                     </td>
                     <td>
                         {{(pokemon[poke_id]|length) - 1}}<br>
