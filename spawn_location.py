@@ -5,22 +5,30 @@ import jinja2
 import os
 import operator
 import sqlite3
+import codecs
+
+sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+sys.stderr = codecs.getwriter('utf8')(sys.stderr)
+
+locales = ['de', 'en', 'fr', 'zh_cn']
+locale = 'en'
+suffix = ''
 
 if len(sys.argv) < 2:
-    raise ValueError('Missing arguments. Please supply lat/long like "12.34, 14.56" and optionally a suffix for generated files as second arg')
-elif len(sys.argv) > 2:
+    raise ValueError(
+        'Missing arguments. Please supply lat/long like "12.34, 14.56"')
+elif len(sys.argv) == 3:
     suffix = "_{}".format(str(sys.argv[2]))
-else:
-    suffix = ''
+elif len(sys.argv) == 4:
+    suffix = "_{}".format(str(sys.argv[2]))
+    if str(sys.argv[3]) in locales:
+        locale = str(sys.argv[3])
 
 center = sys.argv[1]
 
-print (center, suffix)
-
 pokemon = {}
 spawns = {}
-# You can load different localizations here
-pokemonsJSON = json.load(open('../locales/pokemon.en.json'))
+pokemonsJSON = json.load(open('../locales/pokemon.{}.json'.format(locale)))
 
 # Read database into memory
 conn = sqlite3.connect('../db.sqlite')
@@ -31,8 +39,8 @@ conn.close()
 
 
 # 29 -> 30
-def fix_delta(delta):
-    return int(round(delta / 10.0) * 10)
+def fix_delta(unfixed_delta):
+    return int(round(unfixed_delta / 10.0) * 10)
 
 
 def render(tpl_path, context):
@@ -83,7 +91,8 @@ for poke_id in xrange(0, 152):
             spawn_at.append((t.hour, t.minute, t.day, "{:02}:{:02}".format(t.hour, t.minute), spawn_entry['lat'],
                              spawn_entry['long']))
             spawn_entry['time'] = (
-            t.hour, t.minute, t.day, "{:02}:{:02}".format(t.hour, t.minute), spawn_entry['lat'], spawn_entry['long'])
+                t.hour, t.minute, t.day, "{:02}:{:02}".format(t.hour, t.minute), spawn_entry['lat'],
+                spawn_entry['long'])
 
         poke_spawns[poke_id] += spawn_at
 
