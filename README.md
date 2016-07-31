@@ -1,5 +1,6 @@
 # PokeminerSpawns
-Forked from gist https://gist.github.com/ferazambuja/bb7482ffaefe4c554f2b88165a0a7531
+Forked from [this](https://gist.github.com/ferazambuja/bb7482ffaefe4c554f2b88165a0a7531) Gist which originated from [this](https://gist.github.com/Samuirai/a2a00d4dc3a8e8e8ae061d3c6782317e) Gist.
+Thanks Samuirai and farazambuja.
 
 ## Setup
 1. Setup [Pokeminer](https://github.com/modrzew/pokeminer)
@@ -12,6 +13,7 @@ Forked from gist https://gist.github.com/ferazambuja/bb7482ffaefe4c554f2b88165a0
  - `LOCALE`: which Pokemon JSON locale to use (available right now: `de`, `en`, `fr`, `zh_cn`)
 - *Optional*: create `config.json`
  - format: ``` {"maps_api":"YOUR_API_KEY"} ```
+ - `maps_api`: your Google Maps Javascript API Key
  
 Note: Pokemon spawn information is extracted from the Pokeminer database.
 Currently this script only works with SQLite databases and it's assumed that your Pokeminer database is named `db.sqlite`.
